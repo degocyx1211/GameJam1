@@ -50,21 +50,21 @@ public class PlayerController : MonoBehaviour
 
         //Salto
 
-        if (charController.isGrounded)
-        {
-            moveDirection.y = -1f;
+        //if (charController.isGrounded)
+        //{
+        //    moveDirection.y = -1f;
 
-            if (Input.GetButtonDown("Jump"))
-            {
-                moveDirection.y = jumpForce;
-                doubleJump = true;
-            }
-        }
-        else if (Input.GetButtonDown("Jump") && doubleJump == true)
-        {
-            moveDirection.y = jumpForce;
-            doubleJump = false;
-        }
+        //    if (Input.GetButtonDown("Jump"))
+        //    {
+        //        moveDirection.y = jumpForce;
+        //        doubleJump = true;
+        //    }
+        //}
+        //else if (Input.GetButtonDown("Jump") && doubleJump == true)
+        //{
+        //    moveDirection.y = jumpForce;
+        //    doubleJump = false;
+        //}
 
 
         //Gravedad
@@ -72,23 +72,23 @@ public class PlayerController : MonoBehaviour
 
 
         //Solo rota si hay movimiento del Player
-        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
-        {
-            //El player rota con la cámara
-            transform.rotation = Quaternion.Euler(0f, playerCamera.transform.rotation.eulerAngles.y, 0f);
+        //if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        //{
+        //    //El player rota con la cámara
+        //    transform.rotation = Quaternion.Euler(0f, playerCamera.transform.rotation.eulerAngles.y, 0f);
 
-            //El player rotahacia la dirección a donde camina
-            Quaternion newRotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0f, moveDirection.z));
+        //    //El player rotahacia la dirección a donde camina
+        //    Quaternion newRotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0f, moveDirection.z));
 
-            //Rota suavemente
-            playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, newRotation, rotateSpeed * Time.deltaTime);
+        //    //Rota suavemente
+        //    playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, newRotation, rotateSpeed * Time.deltaTime);
 
-        }
+        //}
 
-        //afecta los datos del animator. Le envía datos al parametro Speed
-        animator.SetFloat("Speed", Mathf.Abs(moveDirection.x) + Mathf.Abs(moveDirection.z));
-        //Afecta el grounded para saber cuando está en el suelo
-        animator.SetBool("Grounded", charController.isGrounded);
+        ////afecta los datos del animator. Le envía datos al parametro Speed
+        //animator.SetFloat("Speed", Mathf.Abs(moveDirection.x) + Mathf.Abs(moveDirection.z));
+        ////Afecta el grounded para saber cuando está en el suelo
+        //animator.SetBool("Grounded", charController.isGrounded);
 
     }
 }
