@@ -8,30 +8,26 @@ using UnityEngine.UI;
 
 public class QuickTimeEvents : MonoBehaviour
 {
+    public static QuickTimeEvents instance;
 
     public TextMeshPro texto;
 
     private int currentIndex;
     public string[] keyWords;
     public KeyCode[] CommandSucesion;
-    private bool talking = false;
+    public bool talking = false;
+
+    private void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
         currentIndex = 0;
         texto.gameObject.SetActive(false);
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player") && talking && Input.anyKeyDown)
-        {
-                PressedKeys();
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        Reset();
-    }
+ 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -51,14 +47,14 @@ public class QuickTimeEvents : MonoBehaviour
         }
 
     }
-    private void Reset()
+    public void Reset()
     {
         talking = false;
         currentIndex = 0;
         texto.gameObject.SetActive(false);
     }
 
-    void PressedKeys ()
+    public void PressedKeys ()
     {
         
        
