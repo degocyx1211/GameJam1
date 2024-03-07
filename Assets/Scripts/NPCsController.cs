@@ -25,7 +25,9 @@ public class NPCsController : MonoBehaviour
         animatorNPC.SetBool("angry", angry);
     }
 
-    private void OnTriggerEnter(Collider other)
+
+
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
