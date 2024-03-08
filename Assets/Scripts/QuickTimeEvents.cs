@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,90 +10,125 @@ using UnityEngine.UI;
 public class QuickTimeEvents : MonoBehaviour
 {
 
-    public TextMeshPro texto;
+    public static QuickTimeEvents instance;
 
+    [Header("Words System")]
     private int currentIndex;
     public string[] keyWords;
     public KeyCode[] CommandSucesion;
-    private bool talking = false;
+
+    public TextMeshProUGUI wordCanvas;
+    public GameObject PanelWin;
+
+    private int npcCount;
+    public int excuteCount = 0;
+    public bool talking = false;
+    public NPCsController npcController;
+    private void Awake()
+    {
+        instance = this;
+    }
+
     void Start()
     {
+        //actualNpc = SpawnManager.instance.NPCCount;
         currentIndex = 0;
-        texto.gameObject.SetActive(false);
+        wordCanvas = GameObject.Find("CanvasWords").GetComponentInChildren<TextMeshProUGUI>();
     }
 
-    private void OnTriggerStay(Collider other)
+    void Update()
     {
-        if (other.gameObject.CompareTag("Player") && talking && Input.anyKeyDown)
+        if (talking && Input.anyKeyDown)
         {
-                PressedKeys();
-        }
+            PressedKeys();
+        } 
     }
-    private void OnTriggerExit(Collider other)
-    {
-        Reset();
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            // Activar el texto
-            texto.gameObject.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                texto.gameObject.SetActive(false);
-                WordsToKeys();
-                talking = true;
-            }
-            else
-            {
-
-            }
-        }
-
-    }
-    private void Reset()
+ 
+    public void Reset()
     {
         talking = false;
         currentIndex = 0;
-        texto.gameObject.SetActive(false);
+
+        //texto.gameObject.SetActive(false);
     }
 
-    void PressedKeys ()
+    public void PressedKeys()
     {
-        
-       
-        if (Input.GetKeyDown(CommandSucesion[currentIndex]))
+        if(currentIndex < CommandSucesion.Length)
         {
-            // La tecla presionada es la correcta en la secuencia
-            currentIndex ++;
-          
-            // Si hemos llegado al final de la secuencia, ejecutar el comando
-            if (currentIndex >= CommandSucesion.Length)
+            if (Input.GetKeyDown(CommandSucesion[currentIndex]))
             {
-                ExecuteCommand();
+                Colorize();
+                Debug.Log(CommandSucesion[currentIndex]);
+                // La tecla presionada es la correcta en la secuencia
+                currentIndex++;
+
+                // Si hemos llegado al final de la secuencia, ejecutar el comando
+                if (currentIndex >= CommandSucesion.Length)
+                {
+                    ExecuteCommand();
+                }
             }
-    }
-        else
-        {      // Si la tecla presionada no es la correcta, reiniciar la secuencia
-            currentIndex = 0;
+            else
+            {      // Si la tecla presionada no es la correcta, reiniciar la secuencia
+                currentIndex = 0;
+            }
         }
 
-      
-        // Verificar si el jugador presiona la tecla correcta en la secuencia
-        
-       
     }
     void ExecuteCommand()
     {
-        
         Debug.Log("Comando ejecutado!");
-       
+        talking = false;
+        wordCanvas.text = "";
+        npcController.happy = true;
+        excuteCount++;
+        StartCoroutine(SpawnNPC());
+        currentIndex = 0;
+        if(excuteCount == 3)
+        {
+            PanelWin.SetActive(true);
+        }
 
     }
-    void WordsToKeys()
+
+    IEnumerator SpawnNPC()
     {
-        
+        yield return new WaitForSeconds(6);
+        npcController.DestroyNpc();
+        yield return new WaitForEndOfFrame();
+    }
+
+    void Colorize() {
+        string[] listString = new string[CommandSucesion.Length];
+        string letterKeyCode;
+        if (currentIndex == 0)
+        {
+            letterKeyCode = CommandSucesion[0].ToString();
+            listString[0] = "<color=yellow>" + letterKeyCode + "</color>";
+            for (int i = currentIndex + 1; i < CommandSucesion.Length; i++)
+            {
+                letterKeyCode = CommandSucesion[i].ToString();
+                listString[i] = letterKeyCode;
+            }
+        }
+        else {         
+            for (int i = 0; i <= currentIndex; i++)
+            {
+                letterKeyCode = CommandSucesion[i].ToString();
+                listString[i] = "<color=yellow>" + letterKeyCode + "</color>";
+            }         
+            for (int i = currentIndex + 1 ; i < CommandSucesion.Length; i++)
+            {
+                letterKeyCode = CommandSucesion[i].ToString();
+                listString[i] = letterKeyCode;
+            }
+        }
+        wordCanvas.text = string.Join("", listString);
+    }
+
+    public void WordsToKeys()
+    {
         int indexRandom = Random.Range(0, keyWords.Length);
         string word = keyWords[indexRandom];
         word = word.ToUpper();
@@ -105,27 +141,6 @@ public class QuickTimeEvents : MonoBehaviour
             keyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), character);
             CommandSucesion[i] = keyCode;
         }
-
+        wordCanvas.text = word;
     }
-
-
-  
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
