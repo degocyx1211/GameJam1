@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -745,11 +745,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3430924910580081372, guid: ccb7e2b118a1b45469a9bde2476095d0, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000018503596
+      value: 0.0000018844561
       objectReference: {fileID: 0}
     - target: {fileID: 3430924910580081372, guid: ccb7e2b118a1b45469a9bde2476095d0, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000003122707
+      value: -0.00000031782383
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ccb7e2b118a1b45469a9bde2476095d0, type: 3}
@@ -1761,8 +1761,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278848010
-  m_fontColor: {r: 0.03773582, g: 0.03773582, b: 0.03773582, a: 1}
+    rgba: 4280229844
+  m_fontColor: {r: 0.8301887, g: 0.121395506, b: 0.121395506, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3046,7 +3046,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1488004831243418229
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3232,8 +3232,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4278782425
+  m_fontColor: {r: 0.8490566, g: 0.03604484, b: 0.03604484, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3358,7 +3358,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 788202a14f5de9b4da46e85614cbf4de, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b939a36dfaeec3f4e8c0965e7d93bf87, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3393,7 +3393,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1488004831776972867
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3434,7 +3434,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &1488004831782471564
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4179,7 +4179,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &1488004832739453910
 CanvasRenderer:
   m_ObjectHideFlags: 0
