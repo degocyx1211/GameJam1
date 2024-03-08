@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
@@ -50,13 +51,16 @@ public class PlayerController : MonoBehaviour
     //Movimiento
     void MovePlayer()
     {
-        float yStore = moveDirection.y;
-        moveDirection = (transform.forward * Input.GetAxisRaw("Vertical")) + (transform.right * Input.GetAxisRaw("Horizontal"));
-        moveDirection.Normalize();
-        moveDirection = moveDirection * moveSpeed;
-        moveDirection.y = yStore;
+        if (QuickTimeEvents.instance.talking == false) {
+            float yStore = moveDirection.y;
+            moveDirection = (transform.forward * Input.GetAxisRaw("Vertical")) + (transform.right * Input.GetAxisRaw("Horizontal"));
+            moveDirection.Normalize();
+            moveDirection = moveDirection * moveSpeed;
+            moveDirection.y = yStore;
 
-        charController.Move(moveDirection * Time.deltaTime);
+            charController.Move(moveDirection * Time.deltaTime);
+        }
+        
     }
 
     void JumpPlayer()
@@ -97,8 +101,6 @@ public class PlayerController : MonoBehaviour
     {
         //afecta los datos del animator. Le envía datos al parametro Speed
         animator.SetFloat("Speed", Mathf.Abs(moveDirection.x) + Mathf.Abs(moveDirection.z));
-        ////Afecta el grounded para saber cuando está en el suelo
-        //animator.SetBool("Grounded", charController.isGrounded);
     }
 
 
