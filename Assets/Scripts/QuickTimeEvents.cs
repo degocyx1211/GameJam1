@@ -16,7 +16,9 @@ public class QuickTimeEvents : MonoBehaviour
     private int currentIndex;
     public string[] keyWords;
     public KeyCode[] CommandSucesion;
-    
+
+    public TextMeshProUGUI wordCanvas;
+
     public bool talking = false;
     private void Awake()
     {
@@ -25,7 +27,8 @@ public class QuickTimeEvents : MonoBehaviour
 
     void Start()
     {
-        currentIndex = 0;  
+        currentIndex = 0;
+        wordCanvas = GameObject.Find("CanvasWords").GetComponentInChildren<TextMeshProUGUI>();
     }
 
     void Update()
@@ -50,6 +53,9 @@ public class QuickTimeEvents : MonoBehaviour
         if (Input.GetKeyDown(CommandSucesion[currentIndex]))
         {
 
+
+            Colorize();
+            Debug.Log(CommandSucesion[currentIndex]);
             // La tecla presionada es la correcta en la secuencia
             currentIndex ++;
           
@@ -72,9 +78,60 @@ public class QuickTimeEvents : MonoBehaviour
 
         Debug.Log("Comando ejecutado!");
         talking = false;
+        wordCanvas.text = "";
+        NPCsController.instance.happy = true;
+        StartCoroutine(SpawnNPC());
 
     }
-  
+
+    IEnumerator SpawnNPC()
+    {
+        yield return new WaitForSeconds(10);
+        SpawnManager.instance.SpawnNPCWave();
+    }
+
+    void Colorize() {
+
+        string[] listString = new string[CommandSucesion.Length];
+
+
+
+
+        string letterKeyCode;
+        if (currentIndex == 0)
+        {
+            letterKeyCode = CommandSucesion[0].ToString();
+            listString[0] = "<color=yellow>" + letterKeyCode + "</color>";
+            for (int i = currentIndex + 1; i < CommandSucesion.Length; i++)
+            {
+                letterKeyCode = CommandSucesion[i].ToString();
+                listString[i] = letterKeyCode;
+            }
+        }
+        else {
+            
+            
+            for (int i = 0; i <= currentIndex; i++)
+            {
+
+                letterKeyCode = CommandSucesion[i].ToString();
+                listString[i] = "<color=yellow>" + letterKeyCode + "</color>";
+            }
+           
+            for (int i = currentIndex + 1 ; i < CommandSucesion.Length; i++)
+            {
+                letterKeyCode = CommandSucesion[i].ToString();
+                listString[i] = letterKeyCode;
+            }
+        }
+
+       
+
+        wordCanvas.text = string.Join("", listString);
+
+
+    }
+
     public void WordsToKeys()
     {
         int indexRandom = Random.Range(0, keyWords.Length);
@@ -89,6 +146,8 @@ public class QuickTimeEvents : MonoBehaviour
             keyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), character);
             CommandSucesion[i] = keyCode;
         }
+
+        wordCanvas.text = word;
 
     }
 }

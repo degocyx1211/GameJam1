@@ -1837,6 +1837,7 @@ GameObject:
   - component: {fileID: 5311502957102115607}
   - component: {fileID: 5311502957102115601}
   - component: {fileID: 5311502957102115606}
+  - component: {fileID: 1933412367}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1891,14 +1892,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doubleJump: 0
-  moveSpeed: 7
+  moveSpeed: 4
   jumpForce: 10
   garavityScale: 5
-  rotateSpeed: 5
+  rotateSpeed: 3
   charController: {fileID: 5311502957102115601}
   playerCamera: {fileID: 0}
   playerModel: {fileID: 7623913421580440213}
   animator: {fileID: 3775820395550020181}
+--- !u!114 &1933412367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5311502957102115602}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728768839b089314ab6782c2f374310e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayDistance: 1
+  npcLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  panelTextoNPC: {fileID: 0}
+  texto: {fileID: 0}
+  size: {x: 0, y: 0, z: 0}
+  m_HitDetect: 0
 --- !u!1 &5435827064137433185
 GameObject:
   m_ObjectHideFlags: 0
@@ -2515,6 +2536,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7099437116883650607}
   - component: {fileID: 3775820395550020181}
+  - component: {fileID: 1135700825}
   m_Layer: 0
   m_Name: CharacterPlayer
   m_TagString: Untagged
@@ -2566,6 +2588,26 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1135700825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7623913421580440213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728768839b089314ab6782c2f374310e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayDistance: 2
+  npcLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  panelTextoNPC: {fileID: 0}
+  texto: {fileID: 0}
+  size: {x: 0, y: 0, z: 0}
+  m_HitDetect: 0
 --- !u!1 &7955020810614185884
 GameObject:
   m_ObjectHideFlags: 0

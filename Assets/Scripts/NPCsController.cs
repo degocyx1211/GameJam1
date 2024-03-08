@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class NPCsController : MonoBehaviour
+public class NPCsController : MonoBehaviour, IInteractable
 {
+
+    public static NPCsController instance;
     [Header("Cuadro Dialogos Npc")]
     
 
@@ -14,7 +16,10 @@ public class NPCsController : MonoBehaviour
 
     public Animator animatorNPC;
 
-  
+    private void Awake()
+    {
+        instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -22,21 +27,25 @@ public class NPCsController : MonoBehaviour
         happy = false;
         animatorNPC = GetComponent<Animator>();
         talking = QuickTimeEvents.instance.talking;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-       SetAnimator();
+        
+        SetAnimator();
 
-        if (talking && Input.GetKeyDown(KeyCode.Escape))
+        if (talking && Input.GetKeyDown(KeyCode.Q))
         {
             talking = false;
             angry = true;
             happy = false;
+            QuickTimeEvents.instance.wordCanvas.text = "";
         }
     }
 
+    
     void SetAnimator()
     {
         animatorNPC.SetBool("happy", happy);
@@ -47,15 +56,18 @@ public class NPCsController : MonoBehaviour
     public void Interact()
     {
 
-        //texto.gameObject.SetActive(true);
+        //PlayerController.instance.charController.enabled(false);
 
+
+       
         if (Input.GetKeyDown(KeyCode.F) && !talking)
         {
+            
             //texto.gameObject.SetActive(false);
+
             QuickTimeEvents.instance.WordsToKeys();
             talking = true;
             QuickTimeEvents.instance.talking = talking;
-            happy = true;
             angry = false;
         }
     }

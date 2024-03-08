@@ -6,7 +6,7 @@ using TMPro;
 
 public interface IInteractable
 {
-    void Interact();
+    public void Interact();
 }
 public class Interactor : MonoBehaviour
 {
@@ -15,14 +15,17 @@ public class Interactor : MonoBehaviour
     public LayerMask npcLayer;
     private RaycastHit rayo;
 
-    public GameObject panelTextoNPC;
-    public TextMeshProUGUI texto;
+    public GameObject canvasTextNPC;
+  
+    public Vector3 size;
+    public bool m_HitDetect;
     
-
+       
 
     private void Start()
     {
-       
+        
+
     }
     void Update()
     {
@@ -34,18 +37,24 @@ public class Interactor : MonoBehaviour
 
     void DetectObjects()
     {
-        
-        if (Physics.Raycast(transform.position, transform.forward, out rayo, rayDistance, npcLayer))
+     
+        if (Physics.Raycast(transform.position, transform.forward, out rayo, rayDistance, npcLayer)&& !NPCsController.instance.happy)
         {
+            Transform childTransform = rayo.collider.gameObject.transform.GetChild(7);
+            canvasTextNPC = childTransform.gameObject;
+
             if (rayo.collider.gameObject.TryGetComponent(out IInteractable interactObj))
+                
                 interactObj.Interact();
-            panelTextoNPC.SetActive(true);
+            canvasTextNPC.SetActive(true);
             rayo.collider.gameObject.transform.forward = -transform.forward;
         }
         else
         {
-            panelTextoNPC.SetActive(false);
+            canvasTextNPC.SetActive(false);
         }
+
+        
     } 
 
      void OnDrawGizmosSelected()
