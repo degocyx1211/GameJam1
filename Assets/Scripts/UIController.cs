@@ -27,10 +27,7 @@ public class UIController : MonoBehaviour
     public Button resumeButtonPause;
     public Button restartButtonPause;
 
-    //public AudioSource starMusic;
-    //public AudioSource musicGame;
-    //public AudioSource musicWin;
-    //public AudioSource musicLose;
+    
 
     public bool flagToMusic;
 
@@ -74,16 +71,16 @@ public class UIController : MonoBehaviour
         resumeButtonPause.onClick.AddListener(UnPause);
         restartButtonPause.onClick.AddListener(RestartGame);
         panelStart.SetActive(true);
-        //starMusic.Play();
-        flagToMusic = true;
+        AudioManager.instance.PlayMusic(0);
         Time.timeScale = 0f;
     }
     void StartButtonGame()
     {
         panelStart.SetActive(false);
         Time.timeScale = 1f;
-        //starMusic.Stop();
-        //musicGame.Play();
+        AudioManager.instance.PlayMusic(1);
+        AudioManager.instance.StopMusic(0);
+        NPCsController.instance.AudioAngry();
 
     }
 
