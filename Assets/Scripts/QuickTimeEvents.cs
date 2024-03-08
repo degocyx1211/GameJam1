@@ -18,6 +18,7 @@ public class QuickTimeEvents : MonoBehaviour
     public KeyCode[] CommandSucesion;
 
     public TextMeshProUGUI wordCanvas;
+    public GameObject PanelWin;
 
     private int npcCount;
     public int excuteCount = 0;
@@ -82,14 +83,11 @@ public class QuickTimeEvents : MonoBehaviour
         wordCanvas.text = "";
         npcController.happy = true;
         excuteCount++;
-        if(excuteCount == SpawnManager.instance.NPCCount)
-        {
-            StartCoroutine(SpawnNPC());
-        }
+        StartCoroutine(SpawnNPC());
         currentIndex = 0;
         if(excuteCount == 3)
         {
-
+            PanelWin.SetActive(true);
         }
 
     }
