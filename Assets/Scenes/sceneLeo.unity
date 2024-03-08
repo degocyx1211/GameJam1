@@ -320,15 +320,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3430924910355916534, guid: ccb7e2b118a1b45469a9bde2476095d0, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.20197171
+      value: 0.20197172
       objectReference: {fileID: 0}
     - target: {fileID: 3430924910355916534, guid: ccb7e2b118a1b45469a9bde2476095d0, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000018748833
+      value: 0.0000018421109
       objectReference: {fileID: 0}
     - target: {fileID: 3430924910355916534, guid: ccb7e2b118a1b45469a9bde2476095d0, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00000038671132
+      value: -0.0000003801438
       objectReference: {fileID: 0}
     - target: {fileID: 3430924910580081372, guid: ccb7e2b118a1b45469a9bde2476095d0, type: 3}
       propertyPath: m_LocalRotation.x
@@ -336,11 +336,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3430924910580081372, guid: ccb7e2b118a1b45469a9bde2476095d0, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000001886354
+      value: 0.0000018873159
       objectReference: {fileID: 0}
     - target: {fileID: 3430924910580081372, guid: ccb7e2b118a1b45469a9bde2476095d0, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00000031813292
+      value: -0.0000003182896
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ccb7e2b118a1b45469a9bde2476095d0, type: 3}
@@ -563,9 +563,15 @@ MonoBehaviour:
   - Animos
   CommandSucesion: 
   wordCanvas: {fileID: 0}
+  PanelWin: {fileID: 1235222304}
   excuteCount: 0
   talking: 0
   npcController: {fileID: 0}
+--- !u!1 &1235222304 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7584101165603700233, guid: b58a0088f6ae16547a12d6af075107c2, type: 3}
+  m_PrefabInstance: {fileID: 9072034505703462029}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1465577659
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1098,7 +1104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7584101165721978803, guid: b58a0088f6ae16547a12d6af075107c2, type: 3}
       propertyPath: m_Name
-      value: Canvas
+      value: CanvasMenu
       objectReference: {fileID: 0}
     - target: {fileID: 7584101165721978807, guid: b58a0088f6ae16547a12d6af075107c2, type: 3}
       propertyPath: m_Pivot.x

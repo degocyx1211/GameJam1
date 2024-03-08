@@ -80,7 +80,7 @@ public class UIController : MonoBehaviour
         Time.timeScale = 1f;
         AudioManager.instance.PlayMusic(1);
         AudioManager.instance.StopMusic(0);
-        NPCsController.instance.AudioAngry();
+        //NPCsController.instance.AudioAngry();
 
     }
 
