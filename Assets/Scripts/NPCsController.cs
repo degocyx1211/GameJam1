@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class NPCsController : MonoBehaviour
 {
+    [Header("Cuadro Dialogos Npc")]
     
 
     public bool happy;
@@ -19,28 +21,20 @@ public class NPCsController : MonoBehaviour
         angry = true;
         happy = false;
         animatorNPC = GetComponent<Animator>();
-        //talking = QuickTimeEvents.instance.talking;
+        talking = QuickTimeEvents.instance.talking;
     }
 
     // Update is called once per frame
     void Update()
     {
-       //SetAnimator();
+       SetAnimator();
 
-    }
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player") && talking && Input.anyKeyDown)
+        if (talking && Input.GetKeyDown(KeyCode.Escape))
         {
-            QuickTimeEvents.instance.PressedKeys();
-            happy = true;
-            angry = false;
+            talking = false;
+            angry = true;
+            happy = false;
         }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        QuickTimeEvents.instance.Reset();
-
     }
 
     void SetAnimator()
@@ -50,17 +44,20 @@ public class NPCsController : MonoBehaviour
         animatorNPC.SetBool("talking", talking);
     }
 
+    public void Interact()
+    {
 
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    if (other.CompareTag("Player"))
-    //    {
-    //        angry = false;
-    //        happy = true;
-    //    }
-    //}
+        //texto.gameObject.SetActive(true);
 
-
-
+        if (Input.GetKeyDown(KeyCode.F) && !talking)
+        {
+            //texto.gameObject.SetActive(false);
+            QuickTimeEvents.instance.WordsToKeys();
+            talking = true;
+            QuickTimeEvents.instance.talking = talking;
+            happy = true;
+            angry = false;
+        }
+    }
 
 }

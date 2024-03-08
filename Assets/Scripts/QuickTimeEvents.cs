@@ -2,17 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-
 using Unity.VisualScripting;
-
-
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class QuickTimeEvents : MonoBehaviour
 {
-
 
     public static QuickTimeEvents instance;
 
@@ -22,70 +18,24 @@ public class QuickTimeEvents : MonoBehaviour
     public KeyCode[] CommandSucesion;
     
     public bool talking = false;
-
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
         currentIndex = 0;  
     }
 
-    public static QuickTimeEvents instance;
-
-    public TextMeshPro texto;
-
-    private int currentIndex;
-    public string[] keyWords;
-    public KeyCode[] CommandSucesion;
-    public bool talking = false;
-
-    private void Awake()
-    {
-        instance = this;
-    }
-
-
     void Update()
     {
         if (talking && Input.anyKeyDown) {
             
             PressedKeys();
-        }
-        
+        } 
     }
-    
-
-
-
-
-
-
-    void Start()
-    {
-        currentIndex = 0;
-        texto.gameObject.SetActive(false);
-    }
-
  
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            // Activar el texto
-            texto.gameObject.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                texto.gameObject.SetActive(false);
-                WordsToKeys();
-                talking = true;
-            }
-            else
-            {
-
-            }
-        }
-
-    }
-
     public void Reset()
     {
         talking = false;
@@ -94,20 +44,9 @@ public class QuickTimeEvents : MonoBehaviour
         //texto.gameObject.SetActive(false);
     }
 
-
-    void PressedKeys ()
-    {
-        if (Input.GetKeyDown(CommandSucesion[currentIndex]))
-        {
-
-
-        texto.gameObject.SetActive(false);
-    }
-
     public void PressedKeys ()
     {
-        
-       
+
         if (Input.GetKeyDown(CommandSucesion[currentIndex]))
         {
 
@@ -125,10 +64,8 @@ public class QuickTimeEvents : MonoBehaviour
             currentIndex = 0;
         }
 
-      
         // Verificar si el jugador presiona la tecla correcta en la secuencia
-        
-       
+  
     }
     void ExecuteCommand()
     {
@@ -137,18 +74,9 @@ public class QuickTimeEvents : MonoBehaviour
         talking = false;
 
     }
+  
     public void WordsToKeys()
     {
-
-        
-        Debug.Log("Comando ejecutado!");
-       
-
-    }
-    void WordsToKeys()
-    {
-        
-
         int indexRandom = Random.Range(0, keyWords.Length);
         string word = keyWords[indexRandom];
         word = word.ToUpper();
@@ -163,25 +91,4 @@ public class QuickTimeEvents : MonoBehaviour
         }
 
     }
-
-
-  
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
