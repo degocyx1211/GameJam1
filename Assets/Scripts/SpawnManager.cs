@@ -15,12 +15,22 @@ public class SpawnManager : MonoBehaviour
 
     public int NPCCount;
     public int waveCount = 1;
+    public int onlyOneActive = 1;
 
     private void Awake()
     {
         instance = this;
     }
 
+    private void Start()
+    {
+        NPCCount = 1;
+        if(GameObject.Find("NPC") == null)
+        {
+            Instantiate(NPCPrefab, GenerateSpawnPosition(), NPCPrefab.transform.rotation);
+            waveCount++;
+        }
+    }
 
     // Generate random spawn position for powerups and enemy balls
     Vector3 GenerateSpawnPosition()
@@ -30,19 +40,21 @@ public class SpawnManager : MonoBehaviour
         return new Vector3(xPos, 0, zPos);
     }
 
-
     public void SpawnNPCWave()
     {
-        // Spawn number of enemy balls based on wave number
-        for (int i = 0; i < waveCount; i++)
+        if(onlyOneActive == 1)
         {
-            //Instancia de otra clase
-            GameObject NPC = Instantiate(NPCPrefab, GenerateSpawnPosition(), NPCPrefab.transform.rotation);
-           
+            // Spawn number of enemy balls based on wave number
+            for (int i = 0; i < waveCount; i++)
+            {
+                //Instancia de otra clase
+                Instantiate(NPCPrefab, GenerateSpawnPosition(), NPCPrefab.transform.rotation);
+            }
+            NPCCount++;
+            waveCount++;
+            onlyOneActive = 0;
         }
-
-        waveCount++;
-       
+        
     }
   
 }

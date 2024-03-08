@@ -8,12 +8,9 @@ public class NPCsController : MonoBehaviour, IInteractable
 
     public static NPCsController instance;
     [Header("Cuadro Dialogos Npc")]
-    
-
     public bool happy;
     public bool angry;
     public bool talking;
-
     public Animator animatorNPC;
 
     private void Awake()
@@ -26,26 +23,23 @@ public class NPCsController : MonoBehaviour, IInteractable
         angry = true;
         happy = false;
         animatorNPC = GetComponent<Animator>();
-        talking = QuickTimeEvents.instance.talking;
-        
+        talking = QuickTimeEvents.instance.talking;       
     }
 
     // Update is called once per frame
     void Update()
-    {
-        
+    {       
         SetAnimator();
-
         if (talking && Input.GetKeyDown(KeyCode.Q))
         {
+            QuickTimeEvents.instance.talking = false;
             talking = false;
             angry = true;
             happy = false;
             QuickTimeEvents.instance.wordCanvas.text = "";
         }
     }
-
-    
+   
     void SetAnimator()
     {
         animatorNPC.SetBool("happy", happy);
@@ -55,21 +49,20 @@ public class NPCsController : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-
-        //PlayerController.instance.charController.enabled(false);
-
-
-       
-        if (Input.GetKeyDown(KeyCode.F) && !talking)
-        {
-            
+        //PlayerController.instance.charController.enabled(false);      
+        if (!talking)
+        {          
             //texto.gameObject.SetActive(false);
-
             QuickTimeEvents.instance.WordsToKeys();
             talking = true;
             QuickTimeEvents.instance.talking = talking;
             angry = false;
+            
         }
+    }
+    public void DestroyNpc()
+    {
+        Destroy(gameObject);
     }
 
 }
