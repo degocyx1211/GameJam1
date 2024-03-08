@@ -19,14 +19,13 @@ public class NPCsController : MonoBehaviour
         angry = true;
         happy = false;
         animatorNPC = GetComponent<Animator>();
-        talking = QuickTimeEvents.instance.talking;
+        //talking = QuickTimeEvents.instance.talking;
     }
 
     // Update is called once per frame
     void Update()
     {
-        SetAnimator();
-
+       //SetAnimator();
 
     }
     private void OnTriggerStay(Collider other)
